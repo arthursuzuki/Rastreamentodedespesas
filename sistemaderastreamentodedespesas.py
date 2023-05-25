@@ -9,8 +9,8 @@ deletado = []
 saldot = []
 valores = []
 val = 0
-bdd=open("logins.csv","a+")
-bdd.close()
+arq = open("Arquivo.csv","a")
+arq.close()
 
 def dolar():
     try:
@@ -48,6 +48,8 @@ def euro():
             return valorreal
 
 def senha(nome):
+    bdd=open("logins.csv","a+")
+    bdd.close()
     bdd = open("logins.csv", "r+")
     cnt = 0
     linhas = bdd.readlines()
@@ -81,10 +83,9 @@ def senha(nome):
 
     bdd.close()
 
-
+print("Bem vindo ao Sistema de rastreamento de despesas")
 while True:
     j=="n"
-    print("Bem vindo ao Sistema de rastreamento de despesas")
     operacao = input("Qual operação deseja realizar? ").lower()
     os.system("cls")
 
@@ -188,6 +189,7 @@ while True:
             os.system("cls")
         except IndexError:
             print("Não há nada no arquivo.")
+            continue
         
 
     elif operacao == 'edição':
@@ -308,10 +310,10 @@ while True:
         print('Opção inválida.')
         print('As opções possíveis são:')
         print('Deposito \nLeitura \nDeleção \nEdição \nSaldo \nSaque')
+        continue
     if j=="s":
         exit()
     elif j=="sim":
         exit()
     else:
         continue
-
