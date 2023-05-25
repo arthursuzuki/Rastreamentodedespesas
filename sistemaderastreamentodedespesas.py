@@ -308,6 +308,7 @@ while True:
         print('Opção inválida.')
         print('As opções possíveis são:')
         print('Deposito \nLeitura \nDeleção \nEdição \nSaldo \nSaque')
+        continue
     if j=="s":
         exit()
     elif j=="sim":
