@@ -33,19 +33,23 @@ def dolar():
     
 
 def euro():
-    entrada=(input("Digite o valor em euro: "))
-    transf=(entrada.replace(',', '.'))
-    valor=float(transf)
-    api=requests.get(f"https://api.exchangerate-api.com/v4/latest/BRL")
-    data=api.json()
-    if "rates" in data:
-        if "EUR" in data["rates"]:
-            taxa=data["rates"]["EUR"]
-            valorreal= str(round(valor/taxa))
-            os.system("cls")
-            print(f"Para a sua segurança, salvamos o valor em real")
-            print(f"EUR {valor} em reais é: R${valorreal}")
-            return valorreal
+    try:
+        entrada=(input("Digite o valor em euro: "))
+        transf=(entrada.replace(',', '.'))
+        valor=float(transf)
+        api=requests.get(f"https://api.exchangerate-api.com/v4/latest/BRL")
+        data=api.json()
+        if "rates" in data:
+            if "EUR" in data["rates"]:
+                taxa=data["rates"]["EUR"]
+                valorreal= str(round(valor/taxa))
+                os.system("cls")
+                print(f"Para a sua segurança, salvamos o valor em real")
+                print(f"EUR {valor} em reais é: R${valorreal}")
+                return valorreal
+    except ConnectionError or TimeoutError or ConnectionRefusedError:
+        print("Servidor indisponivel, adicione os valores em Real ou tente mais tarde")
+        return ("servidor")
 
 def senha(nome):
     bdd=open("logins.csv","a+")
@@ -115,7 +119,8 @@ while True:
             correto=input("Está tudo certo? ").lower()
             if correto == ("não"):
                 os.system("cls")
-                print("Digite as informações corretas: ")    
+                print("Digite as informações corretas: ")
+                continue  
             else:                
                 arq.write('Nome: ' + nome + ' ; ' + categoria + ' ; ' + valorponto + '\n')
                 arq.close()
