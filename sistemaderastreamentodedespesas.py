@@ -144,40 +144,42 @@ while True:
                     for k3 in arq:
                         if nome in k3:
                             print(k3.strip())
+            else:
+                print("Nome não encontrado")
         arq.close()
         j = input("Deseja finalizar o sistema? ").lower()
         os.system("cls")
         
 
     elif operacao == 'deleção':
-        arq = open('Arquivo.csv', 'r')
-        nome = input("Qual seu o nome completo? ").title()
-        senha(nome)
-        for p in arq:
-            if nome in p:
-                categoria = input("Em qual categoria deseja deletar? ").lower()
-                arq.seek(0)
-                for p2 in arq:
-                    if categoria in p2:
-                        arq.seek(0)
-                        valor = input("Qual valor deseja deletar? ")
-                        valorponto = valor.replace(',', '.')
-                        for p3 in arq:
-                            if valorponto in p3:
-                                arq.seek(0)
-                                for linha1 in arq:
-                                    if nome in linha1:
-                                        if categoria in linha1:
-                                            if valorponto in linha1:
-                                                erro.append(linha1.strip())
-        arq.seek(0)
-        for linha3 in arq:
-            recuperacao.append(linha3.strip())
-        arq.close()    
-        arq = open('Arquivo.csv', 'w')
-        arq.write('')
-        arq.close()
         try:
+            arq = open('Arquivo.csv', 'r')
+            nome = input("Qual seu o nome completo? ").title()
+            senha(nome)
+            for p in arq:
+                if nome in p:
+                    categoria = input("Em qual categoria deseja deletar? ").lower()
+                    arq.seek(0)
+                    for p2 in arq:
+                        if categoria in p2:
+                            arq.seek(0)
+                            valor = input("Qual valor deseja deletar? ")
+                            valorponto = valor.replace(',', '.')
+                            for p3 in arq:
+                                if valorponto in p3:
+                                    arq.seek(0)
+                                    for linha1 in arq:
+                                        if nome in linha1:
+                                            if categoria in linha1:
+                                                if valorponto in linha1:
+                                                    erro.append(linha1.strip())
+            arq.seek(0)
+            for linha3 in arq:
+                recuperacao.append(linha3.strip())
+            arq.close()    
+            arq = open('Arquivo.csv', 'w')
+            arq.write('')
+            arq.close()
             recuperacao.remove(erro[0])
             arq = open('Arquivo.csv', 'a')
             for c in range (len(recuperacao)):
@@ -306,14 +308,17 @@ while True:
         arq.close()
         j = input("Deseja finalizar o sistema? ").lower()
         os.system("cls")
+    elif operacao=="sair":
+        exit()
     else:
         print('Opção inválida.')
         print('As opções possíveis são:')
-        print('Deposito \nLeitura \nDeleção \nEdição \nSaldo \nSaque')
+        print('Deposito \nLeitura \nDeleção \nEdição \nSaldo \nSaque \nSair')
         continue
     if j=="s":
         exit()
     elif j=="sim":
         exit()
     else:
+        j = input("Deseja finalizar o sistema? ").lower()
         continue
